@@ -41,8 +41,16 @@ local function playerPosition()
   return tensor.DoubleTensor(game:playerInfo().pos)
 end
 
+local function playerPositionVelocity()
+  return tensor.DoubleTensor(game:playerInfo().vel)
+end
+
 local function playerOrientation()
   return tensor.DoubleTensor(game:playerInfo().angles)
+end
+
+local function playerOrientationVelocity()
+  return tensor.DoubleTensor(game:playerInfo().anglesVel)
 end
 
 local function playerId()
@@ -343,7 +351,9 @@ function debug_observations.extend(custom_observations)
   co.addSpec('DEBUG.MAZE.VARIATION', 'String', {0}, getMazeVariation)
 
   co.addSpec('DEBUG.POS.TRANS', 'Doubles', {3}, playerPosition)
+  co.addSpec('DEBUG.POS.TRANS_VELOCITY', 'Doubles', {3}, playerPositionVelocity)
   co.addSpec('DEBUG.POS.ROT', 'Doubles', {3}, playerOrientation)
+  co.addSpec('DEBUG.POS.ROT_VELOCITY', 'Doubles', {3}, playerOrientationVelocity)
   co.addSpec('DEBUG.PLAYER_ID', 'Bytes', {1}, playerId)
   co.addSpec('DEBUG.PLAYERS.ARMOR', 'Doubles', {0}, playersArmor)
   co.addSpec('DEBUG.PLAYERS.GADGET', 'Doubles', {0}, playersGadget)
